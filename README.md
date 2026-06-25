@@ -46,11 +46,6 @@ To create a superuser:
 python manage.py createsuperuser
 ```
 
-To create a new app:
-```bash
-python manage.py startapp app_name
-```
-
 ## Environment Variables
 
 The project uses python-dotenv to load environment variables from `.env` file:
