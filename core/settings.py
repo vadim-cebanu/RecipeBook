@@ -44,9 +44,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # DRF and extensions
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'recipes_app',
-    'rest_framework.authtoken',
 
 ]
 
@@ -131,13 +131,12 @@ STATIC_URL = 'static/'
 
 # Django REST Framework Settings
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
     ],
-  
 }
 
 # CORS Settings
