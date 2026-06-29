@@ -17,10 +17,11 @@ class RecipeAPITestCaseUnhappy(TestCase):
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
 
     def test_post_without_auth_returns_401(self):
+        user = User.objects.create_user(username="testuser", password="testpassword123")
         data = {
             "title": "Test Recipe",
             "description": "A delicious recipe",
-            "author": 1,
+            "author": user.id,
         }
         response = self.client.post(self.list_url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
@@ -31,7 +32,7 @@ class RecipeAPITestCaseHappy(TestCase):
         self.client = APIClient()
         self.list_url = reverse("recipes-list")
         self.user = User.objects.create_user(
-            username="happyuser", password="testpassword123"
+            username="testuser", password="testpassword123"
         )
         self.token = Token.objects.create(user=self.user)
         self.client.credentials(HTTP_AUTHORIZATION=f"Token {self.token.key}")
